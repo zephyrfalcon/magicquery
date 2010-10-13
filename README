@@ -1,0 +1,10 @@
+Query Magic the Gathering card data (stored in XML) using Python expressions.
+
+Will write docs and such later. Code is very "dirty" right now, must be
+cleaned up first. 
+
+Related projects:
+
+MagicRipper2: http://github.com/zephyrfalcon/magicripper2
+MTGXML: http://projects.flowsnake.org/mtgxml.html
+
