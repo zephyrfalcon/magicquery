@@ -1,0 +1,45 @@
+# TODO
+
+There are many, many things we can add. Here are a few ideas:
+
+GENERAL:
+
+    - add configuration options and command line options
+
+    - add a way to set options at the prompt
+
+CARD METHODS/ATTRIBUTES:
+
+    - name_match() etc, that match against regular expressions
+
+    - once we have keyword data: attribute('flying') etc.
+
+    - hybrid mana, snow mana
+
+    - handle X spells
+
+    - handle power/toughness "*"
+
+OUTPUT:
+
+    - can be redirected or written directly to file, if desired
+
+    - can be in other formats (XML, HTML, whatevs)
+
+    - users should be able to specify custom print functions for both output
+      on screen, and to file
+
+COMMAND LINE:
+
+    - add a way to display all info we have about a certain card, e.g.
+
+      > ?Sliver Queen
+      ...prints all data for this card...
+
+    - 
+
+FARFETCHED:
+
+    - add rules and search them
+    - add banned/restricted lists and use them as search criteria
+
