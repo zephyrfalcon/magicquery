@@ -38,6 +38,10 @@ OUTPUT:
     - users should be able to specify custom print functions for both output
       on screen, and to file
 
+    - ways to "group" results, like the SQL GROUP BY construct; e.g. group by
+      color, etc. (Maybe only a few values would make sense here; color, set,
+      card type, ...?)
+
 COMMAND LINE:
 
     - add a way to display all info we have about a certain card, e.g.
@@ -46,6 +50,13 @@ COMMAND LINE:
       ...prints all data for this card...
 
     - 
+
+PROGRAMMABLE:
+
+    - since everything is in Python, programmers could hack up quick scripts
+      to access or manipulate the card database in ways that are difficult or
+      impossible using the command line and the query language. let's make
+      sure all the relevant code is accessible and obvious to use.
 
 FARFETCHED:
 
