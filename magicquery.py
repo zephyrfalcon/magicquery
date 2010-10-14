@@ -10,6 +10,7 @@ import sys
 import time
 import xml.etree.ElementTree as ET
 #
+import addons
 import magiccard
 
 class MagicSet(object):
@@ -24,22 +25,23 @@ class MagicSet(object):
 cp = ConfigParser.ConfigParser()
 cp.read("config.txt")
 xmldir = os.path.expanduser(cp.get('main', 'xmldir'))
+addondir = os.path.expanduser(cp.get('main', 'addondir'))
 
 def extract_data(xml):
     setnode = xml.find('set')
     cards = xml.findall('set/cards/card')
     return setnode, cards
 
-def determine_xml_files(sets):
-    xmlfiles = os.listdir(xmldir)
-    xmlfiles = [fn for fn in xmlfiles if fn.endswith(".xml")]
+def get_files_for_sets(sets, dir, suffix):
+    files = os.listdir(dir)
+    files = [fn for fn in files if fn.endswith(suffix)]
     if sets:
-        xmlfiles = [fn for fn in xmlfiles if os.path.splitext(fn)[0] in sets]
-    xmlfiles = [os.path.join(xmldir, fn) for fn in xmlfiles]
-    return xmlfiles
+        files = [fn for fn in files if os.path.splitext(fn)[0] in sets]
+    files = [os.path.join(dir, fn) for fn in files]
+    return files
 
 def load_cards(sets=[]):
-    xmlfiles = determine_xml_files(sets)
+    xmlfiles = get_files_for_sets(sets, xmldir, ".xml")
     cards = []
     t1 = time.time()
     for fn in xmlfiles:
@@ -56,12 +58,18 @@ def load_cards(sets=[]):
 
     return cards
 
+def load_addons(sets=[]):
+    addon_files = get_files_for_sets(sets, addondir, ".txt")
+    for fn in addon_files:
+        keywords = addons.load_addons(fn)
+        addons.proliferate(cards, keywords) # :-)
+
 def mainloop():
     while 1:
         try:
             line = raw_input("> ")
         except EOFError:
-            break
+            print; break
 
         for card in cards:
             try:
@@ -76,6 +84,8 @@ if __name__ == "__main__":
     opts, args = getopt.getopt(sys.argv[1:], "", [])
 
     cards = load_cards(sets=args)
+    if addondir:
+        load_addons(sets=args)
     mainloop()
 
                 
