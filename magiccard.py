@@ -92,6 +92,29 @@ class MagicCard(object):
     def text_like(self, s):
         return s.lower() in self['rules_oracle'].lower()
 
+    def has(self, keyword):
+        for kw in self['keywords']:
+            if kw.startswith(('?', '>')): continue
+            parts = kw.split(':')
+            if parts[0] == keyword: return True
+        return False
+
+    def grants(self, keyword):
+        for kw in self['keywords']:
+            if kw.startswith('>'):
+                parts = kw[1:].split(':')
+                if parts[0] == keyword: return True
+        return False
+
+    # TODO: maybe_has or something, for ?keywords
+
+    def protection(self, x):
+        for kw in self['keywords']:
+            parts = kw.split(":")
+            if parts[0] == "protection" and x == parts[1]:
+                return True
+        return False
+
 #
 # set color properties dynamically
 
