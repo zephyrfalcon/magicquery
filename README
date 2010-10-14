@@ -3,6 +3,13 @@ Query Magic the Gathering card data (stored in XML) using Python expressions.
 Will write docs and such later. Code is very "dirty" right now, must be
 cleaned up first. 
 
+It's gonna take a while, but eventually this should be more powerful than
+Gatherer or MagicCards.info. It should also be the first MtG search engine
+that can find, say, all cards with flying, all instants that grant trample,
+all creatures that produce green mana, or all creatures with protection from
+red... just to name a few things. (No, you cannot reliably do this by
+searching the rules text.)
+
 Related projects:
 
 MagicRipper2: http://github.com/zephyrfalcon/magicripper2
