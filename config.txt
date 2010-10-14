@@ -1,0 +1,3 @@
+[main]
+xmldir=~/projects/mtgxml/trunk/xml
+addondir=~/projects/mtgxml/trunk/addons

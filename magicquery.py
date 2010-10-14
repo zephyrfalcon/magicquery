@@ -1,4 +1,6 @@
 # magicquery.py
+#
+# TODO: remove ugly globals etc
 
 import ConfigParser
 import getopt
@@ -10,8 +12,6 @@ import xml.etree.ElementTree as ET
 #
 import magiccard
 
-DEBUG = 1
-
 class MagicSet(object):
 
     @classmethod
@@ -21,37 +21,40 @@ class MagicSet(object):
             setattr(s, name, xml.find(name).text)
         return s
 
-
 cp = ConfigParser.ConfigParser()
 cp.read("config.txt")
 xmldir = os.path.expanduser(cp.get('main', 'xmldir'))
-
-xmlfiles = [os.path.join(xmldir, fn) for fn in os.listdir(xmldir)
-            if fn.endswith(".xml")]
-
-if DEBUG: xmlfiles = xmlfiles[:3]
 
 def extract_data(xml):
     setnode = xml.find('set')
     cards = xml.findall('set/cards/card')
     return setnode, cards
 
-cards = []
-t1 = time.time()
-for fn in xmlfiles:
-    print fn
-    x = ET.parse(fn)
-    setnode, cardnodes = extract_data(x)
-    theset = MagicSet.from_xml(setnode)
-    cs = [magiccard.MagicCard.from_xml(cardnode) for cardnode in cardnodes]
-    for c in cs: c._data['set'] = theset
-    cards.extend(cs)
-    print len(cards)
-t2 = time.time()
-print t2-t1
+def determine_xml_files(sets):
+    xmlfiles = os.listdir(xmldir)
+    xmlfiles = [fn for fn in xmlfiles if fn.endswith(".xml")]
+    if sets:
+        xmlfiles = [fn for fn in xmlfiles if os.path.splitext(fn)[0] in sets]
+    xmlfiles = [os.path.join(xmldir, fn) for fn in xmlfiles]
+    return xmlfiles
 
-# On iMac G5 1.8GHz, loading the XML takes ~20s... but this is WITHOUT
-# creating card objects etc. WITH creating them, it's about ~30s.
+def load_cards(sets=[]):
+    xmlfiles = determine_xml_files(sets)
+    cards = []
+    t1 = time.time()
+    for fn in xmlfiles:
+        print "Loading:", fn
+        x = ET.parse(fn)
+        setnode, cardnodes = extract_data(x)
+        theset = MagicSet.from_xml(setnode)
+        cs = [magiccard.MagicCard.from_xml(cardnode) for cardnode in cardnodes]
+        for c in cs: c._data['set'] = theset
+        cards.extend(cs)
+    t2 = time.time()
+    print "%d cards in %d files, loaded in %.2fs" % (len(cards),
+          len(xmlfiles), t2-t1)
+
+    return cards
 
 def mainloop():
     while 1:
@@ -72,6 +75,7 @@ if __name__ == "__main__":
 
     opts, args = getopt.getopt(sys.argv[1:], "", [])
 
+    cards = load_cards(sets=args)
     mainloop()
 
                 
