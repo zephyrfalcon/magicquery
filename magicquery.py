@@ -1,6 +1,6 @@
 # magicquery.py
 #
-# TODO: remove ugly globals etc
+# TODO: remove ugly globals etc; needs reorganized and refactored
 
 import ConfigParser
 import getopt
@@ -12,6 +12,7 @@ import xml.etree.ElementTree as ET
 #
 import addons
 import magiccard
+from tools import null
 
 class MagicSet(object):
 
@@ -64,12 +65,28 @@ def load_addons(sets=[]):
         keywords = addons.load_addons(fn)
         addons.proliferate(cards, keywords) # :-)
 
+# TODO: expand this so it shows all relevant info for a card
+def show_card(name):
+    for card in cards:
+        if card['name'].lower() == name.strip().lower():
+            print card['name']
+            print card['manacost']
+            print card['type_oracle']
+            print card['rules_oracle']
+            if card['power'] is not null:
+                print "%s/%s" % (card['power'], card['toughness'])
+            break
+
 def mainloop():
     while 1:
         try:
             line = raw_input("> ")
         except EOFError:
             print; break
+
+        if line.startswith("?"):
+            show_card(line[1:].strip())
+            continue
 
         for card in cards:
             try:
