@@ -1,6 +1,7 @@
 # addons.py
 
 def load_addons(filename):
+    print "Loading keywords for:", filename
     with open(filename, 'rb') as f:
         lines = filter(None, map(str.strip, f.readlines()))
 

@@ -8,6 +8,12 @@ GENERAL:
 
     - add a way to set options at the prompt
 
+    - when doing a query, find all matches first (while showing some kind of
+      progress, maybe a dot for each set or something), then display matches,
+      according to settings (e.g. sorted by X, show a number in front, etc).
+      The current setup (show card names as soon as we find a match) works for
+      now, but will be an obstacle later.
+
 CARD METHODS/ATTRIBUTES:
 
     - name_match() etc, that match against regular expressions
@@ -19,7 +25,9 @@ CARD METHODS/ATTRIBUTES:
 
     - some keywords have additional info, e.g. we should be able to do
       "protection('white')" etc. (although this clashes with a potential
-      property called 'protection'.) ditto for mana, etc.
+      property called 'protection'.) ditto for mana, etc. mana is especially
+      interesting, since I want to be able to say, show all cards that produce
+      (at least) G, show all cards that produce colorless mana, etc.
 
     - converted mana cost (tricky in some places)
 
