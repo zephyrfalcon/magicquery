@@ -94,7 +94,6 @@ class MagicCard(object):
 
     def has(self, keyword):
         for kw in self['keywords']:
-            if kw.startswith(('?', '>')): continue
             parts = kw.split(':')
             if parts[0] == keyword: return True
         return False
