@@ -31,11 +31,16 @@ CARD METHODS/ATTRIBUTES:
 
     - converted mana cost (tricky in some places)
 
-    - hybrid mana, snow mana
+    - snow mana
+
+    - we should still be able to "pick apart" hybrid mana (e.g. show cards
+      that have R/W hybrid mana; this is NOT the same as "has_hybrid_mana and
+      white and red").  Also 2/X hybrids.
+
+    - in general, we need to be able to select more precisely on mana cost,
+      anyway. "card has X in its mana cost", etc.
 
     - handle X spells
-
-    - handle power/toughness "*"
 
 OUTPUT:
 

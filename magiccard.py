@@ -141,6 +141,7 @@ class MagicCard(object):
     def toughness_varies(self):
         return isinstance(self['toughness'], tools.Abstract)
 
+
 #
 # set color properties dynamically
 
