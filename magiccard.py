@@ -26,7 +26,7 @@ class DataConverter:
         try:
             return int(value)
         except:
-            return value # probably '*'
+            return tools.Abstract(value) # probably '*'
 
     do_toughness = do_power
 
@@ -132,6 +132,14 @@ class MagicCard(object):
             if len(x) == 2 and (x[0] in "WUGBR" or x[1] in "WUGBR"):
                 return True
         return False
+
+    @property
+    def power_varies(self):
+        return isinstance(self['power'], tools.Abstract)
+
+    @property
+    def toughness_varies(self):
+        return isinstance(self['toughness'], tools.Abstract)
 
 #
 # set color properties dynamically

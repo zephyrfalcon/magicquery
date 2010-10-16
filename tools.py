@@ -11,6 +11,15 @@ class Null(object):
 
 null = Null()
 
+class Abstract(Null):
+    # used to wrap "variable" power/toughness. it should not compare as true
+    # to anything, but we should still be able to identify its value and print
+    # it.
+    def __init__(self, value):
+        self.value = value
+    def __repr__(self):
+        return str(self.value)
+
 def contains_any(s, substrs):
     for sub in substrs:
         if sub in s: return True
