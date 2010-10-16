@@ -65,6 +65,34 @@ def load_addons(sets=[]):
         keywords = addons.load_addons(fn)
         addons.proliferate(cards, keywords) # :-)
 
+class MagicCardDB:
+
+    def __init__(self, cards):
+        self.cards = cards
+        self.results = [] # current result set
+
+    def query(self, expr):
+        self.results = []
+        count = 0
+        for card in cards:
+            count += 1
+            if count % 100 == 0: sys.stdout.write("."); sys.stdout.flush()
+            try:
+                result = eval(expr, globals(), card)
+            except:
+                continue # ignore for now
+            if result:
+                self.results.append(card)
+        print
+
+    def show_results(self):
+        max_len = len(str(len(self.results)))
+        temp = "%" + str(max_len) + "d"
+        for idx, card in enumerate(self.results):
+            print (temp % (idx+1)) + "/" + str(len(self.results)),
+            print "[%s] %s" % (card['set'].shortname, card['name'])
+
+
 # TODO: expand this so it shows all relevant info for a card
 def show_card(name):
     for card in cards:
@@ -78,6 +106,8 @@ def show_card(name):
             break
 
 def mainloop():
+    db = MagicCardDB(cards)
+
     while 1:
         try:
             line = raw_input("> ")
@@ -88,13 +118,9 @@ def mainloop():
             show_card(line[1:].strip())
             continue
 
-        for card in cards:
-            try:
-                result = eval(line, globals(), card)
-            except:
-                continue # ignore for now
-            if result:
-                print card['name']
+        db.query(line)
+        db.show_results()
+
         
 if __name__ == "__main__":
 
