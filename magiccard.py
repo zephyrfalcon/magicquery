@@ -78,12 +78,24 @@ class MagicCard(object):
     def anytype(self, name):
         return self.type(name) or self.subtype(name)
 
+    def has_color(self, color):
+        for x in self._data['manacost']:
+            if tools.contains_any(x, color): return True
+        return False
+
     @property
     def colorless(self):
         for x in self._data['manacost']:
             if tools.contains_any(x, "RBWGU"):
                 return False
         return True
+
+    @property
+    def multicolor(self):
+        colors_found = 0
+        for color in "RBWGU":
+            if self.has_color(color): colors_found += 1
+        return colors_found > 1
 
     def name_like(self, s):
         return s.lower() in self['name'].lower()
@@ -114,6 +126,13 @@ class MagicCard(object):
                 return True
         return False
 
+    @property
+    def has_hybrid_mana(self):
+        for x in self._data['manacost']:
+            if len(x) == 2 and (x[0] in "WUGBR" or x[1] in "WUGBR"):
+                return True
+        return False
+
 #
 # set color properties dynamically
 
@@ -121,10 +140,7 @@ COLORS = [('red', 'R'), ('white', 'W'), ('blue', 'U'), ('green', 'G'),
           ('black', 'B')]
 def add_color_property(color, symbol):
     def f(self):
-        for x in self._data['manacost']:
-            if symbol in x: return True
-        return False
-    #f = lambda self: symbol in self._data['manacost']
+        return self.has_color(symbol)
     f.__name__ = color
     setattr(MagicCard, color, property(f))
 for color, symbol in COLORS:
