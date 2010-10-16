@@ -11,3 +11,7 @@ class Null(object):
 
 null = Null()
 
+def contains_any(s, substrs):
+    for sub in substrs:
+        if sub in s: return True
+    return False

@@ -1,6 +1,6 @@
 # magiccard.py
 
-from tools import null
+import tools
 
 CARD_ATTRS = ['name', 'artist', 'multiverseid', 'number', 'rarity', 
               'type_oracle', 'rules_printed', 'type_printed', 'rules_oracle',
@@ -20,7 +20,7 @@ class DataConverter:
         try:
             return int(value)
         except:
-            return null
+            return tools.null
 
     def do_power(self, node, value):
         try:
@@ -53,7 +53,7 @@ class MagicCard(object):
                 value = c._dc.convert(name, node, value.text)
                 c._data[name] = value
             else:
-                c._data[name] = null
+                c._data[name] = tools.null
         c._post_process()
         return c
 
@@ -81,7 +81,8 @@ class MagicCard(object):
     @property
     def colorless(self):
         for x in self._data['manacost']:
-            if x.startswith(("{", "R", "B", "W", "G", "U")):
+            #if x.startswith(("{", "R", "B", "W", "G", "U")):
+            if tools.contains_any(x, "RBWGU"):
                 return False
         return True
 
