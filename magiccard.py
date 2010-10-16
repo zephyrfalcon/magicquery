@@ -81,7 +81,6 @@ class MagicCard(object):
     @property
     def colorless(self):
         for x in self._data['manacost']:
-            #if x.startswith(("{", "R", "B", "W", "G", "U")):
             if tools.contains_any(x, "RBWGU"):
                 return False
         return True
@@ -121,7 +120,11 @@ class MagicCard(object):
 COLORS = [('red', 'R'), ('white', 'W'), ('blue', 'U'), ('green', 'G'),
           ('black', 'B')]
 def add_color_property(color, symbol):
-    f = lambda self: symbol in self._data['manacost']
+    def f(self):
+        for x in self._data['manacost']:
+            if symbol in x: return True
+        return False
+    #f = lambda self: symbol in self._data['manacost']
     f.__name__ = color
     setattr(MagicCard, color, property(f))
 for color, symbol in COLORS:
