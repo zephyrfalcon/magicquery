@@ -116,10 +116,15 @@ class MagicCard(object):
         return re.search(regex, self['rules_oracle'], 
                0 if case_sensitive else re.I)
 
-    def has(self, keyword):
+    def has(self, keyword, arg=None):
         for kw in self['keywords']:
             parts = kw.split(':')
-            if parts[0] == keyword: return True
+            if parts[0] == keyword: 
+                if arg is None:
+                    return True
+                else:
+                    if parts[1:] and parts[1].lower() == arg.lower():
+                        return True
         return False
 
     def grants(self, keyword):
