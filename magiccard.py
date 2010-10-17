@@ -117,6 +117,9 @@ class MagicCard(object):
                0 if case_sensitive else re.I)
 
     def has(self, keyword, arg=None):
+        # E.g. has('protection')
+        #      has('protection', 'white')
+
         for kw in self['keywords']:
             parts = kw.split(':')
             if parts[0] == keyword: 
