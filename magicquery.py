@@ -96,18 +96,30 @@ class MagicCardDB:
             print "[%s] %s" % (card['set'].shortname, card['name']),
             print mana_cost_repr(card)
 
+    def show_card(self, s):
+        card = None
+        try:
+            num = int(s)
+        except ValueError:
+            for c in cards:
+                if c['name'].lower() == s.strip().lower():
+                    card = c; break
+        else:
+            try:
+                card = self.results[num-1]
+            except IndexError:
+                pass
 
-# TODO: expand this so it shows all relevant info for a card
-def show_card(name):
-    for card in cards:
-        if card['name'].lower() == name.strip().lower():
-            print card['name']
-            print mana_cost_repr(card)
-            print card['type_oracle']
-            print card['rules_oracle']
-            if card['power'] is not null:
-                print "%s/%s" % (card['power'], card['toughness'])
-            break
+        if card is not None:
+            show_card(card)
+
+def show_card(card):
+    print card['name']
+    print mana_cost_repr(card)
+    print card['type_oracle']
+    print card['rules_oracle']
+    if card['power'] is not null:
+        print "%s/%s" % (card['power'], card['toughness'])
 
 def mainloop():
     db = MagicCardDB(cards)
@@ -119,7 +131,7 @@ def mainloop():
             print; break
 
         if line.startswith("?"):
-            show_card(line[1:].strip())
+            db.show_card(line[1:].strip())
             continue
 
         db.query(line)

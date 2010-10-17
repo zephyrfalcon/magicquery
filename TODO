@@ -42,7 +42,11 @@ CARD METHODS/ATTRIBUTES:
 
     - handle X spells
 
-    - planeswalkers: loyalty
+    - for some card, the color cannot be derived from the mana cost; try e.g.
+      > manacost == [] and not type('land')
+      for examples of such cards. There are more, with cmc == 0.
+      We should have a shortlist of card names that can be "forced" to be a
+      certain color, and use them in the color properties.
 
 OUTPUT:
 
