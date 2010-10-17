@@ -70,7 +70,12 @@ class MagicCard(object):
         try:
             return self._data[name]
         except KeyError:
-            return getattr(self, name) # for properties
+            try:
+                return getattr(self, name) # for properties
+            except AttributeError:
+                # we need to raise a KeyError here so eval() tries to look the
+                # name up in the global namespace next
+                raise KeyError, name
 
     def type(self, name):
         return name.lower() in self._data['_types']

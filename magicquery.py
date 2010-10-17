@@ -2,6 +2,7 @@
 #
 # TODO: remove ugly globals etc; needs reorganized and refactored
 
+import __builtin__
 import ConfigParser
 import getopt
 import os
@@ -83,6 +84,7 @@ class MagicCardDB:
             try:
                 result = eval(expr, globals(), card)
             except:
+                import traceback; traceback.print_exc(); break
                 continue # ignore for now
             if result:
                 self.results.append(card)
