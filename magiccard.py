@@ -1,5 +1,6 @@
 # magiccard.py
 
+import re
 import tools
 
 CARD_ATTRS = ['name', 'artist', 'multiverseid', 'number', 'rarity', 
@@ -105,6 +106,15 @@ class MagicCard(object):
         return s.lower() in self['flavor_text'].lower()
     def text_like(self, s):
         return s.lower() in self['rules_oracle'].lower()
+
+    def name_match(self, regex, case_sensitive=1):
+        return re.search(regex, self['name'], 0 if case_sensitive else re.I)
+    def flavor_match(self, regex, case_sensitive=1):
+        return re.search(regex, self['flavor_text'], 
+               0 if case_sensitive else re.I)
+    def text_match(self, regex, case_sensitive=1):
+        return re.search(regex, self['rules_oracle'], 
+               0 if case_sensitive else re.I)
 
     def has(self, keyword):
         for kw in self['keywords']:

@@ -102,7 +102,7 @@ def show_card(name):
     for card in cards:
         if card['name'].lower() == name.strip().lower():
             print card['name']
-            print card['manacost']
+            print mana_cost_repr(card)
             print card['type_oracle']
             print card['rules_oracle']
             if card['power'] is not null:
