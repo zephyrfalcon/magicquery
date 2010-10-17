@@ -97,7 +97,11 @@ class MagicCardDB:
             print mana_cost_repr(card)
 
     def show_card(self, s):
+        """ Show the card indicated by string s. If s can be converted to a
+            number N, then show the N-th card from the last result set.
+            Otherwise, show the first card that has a matching name. """
         card = None
+
         try:
             num = int(s)
         except ValueError:
