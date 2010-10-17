@@ -1,7 +1,34 @@
 Query Magic the Gathering card data (stored in XML) using Python expressions.
 
+Quick setup:
+
+- Download XML from http://projects.flowsnake.org/mtgxml.html and unpack it
+  somewhere.
+- Edit config.txt and point the 'xmldir' to the directory where you just
+  unpacked the XML.
+- Run: python magicquery.py
+- Optional: short set names can be used as arguments:
+  python magicquery.py ZEN WWK ROE
+  (only load cards from the Zendikar block)
+
+N.B. Shortnames can be found at: 
+http://github.com/zephyrfalcon/magicripper2/blob/master/sets.py
+
+Quick example queries:
+
+# find all red cards
+> red
+
+# find all artifact creatures
+> type('artifact') and type('creature')
+
+# find all blue creatures with power > 10
+> blue and power > 10
+
+~
+
 Will write docs and such later. Code is very "dirty" right now, must be
-cleaned up first. 
+cleaned up first. For now, study magiccard.py to see what is possible.
 
 It's gonna take a while, but eventually this should be more powerful than
 Gatherer or MagicCards.info. It should also be the first MtG search engine

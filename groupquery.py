@@ -1,4 +1,7 @@
 # groupquery.py
+# Allow group queries.
+# Not integrated with the command line, it would probably be too cumbersome to
+# use it there; use it in scripts instead.
 
 def groupquery(cards, groupf, accf, acc_default):
     """ Do a query not unlike SQL's GROUP BY. 
