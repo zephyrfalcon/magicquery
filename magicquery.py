@@ -84,7 +84,7 @@ class MagicCardDB:
             try:
                 result = eval(expr, globals(), card)
             except:
-                import traceback; traceback.print_exc(); break
+                #import traceback; traceback.print_exc(); break
                 continue # ignore for now
             if result:
                 self.results.append(card)
