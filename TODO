@@ -42,6 +42,8 @@ CARD METHODS/ATTRIBUTES:
 
     - handle X spells
 
+    - planeswalkers: loyalty
+
 OUTPUT:
 
     - can be redirected or written directly to file, if desired

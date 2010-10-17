@@ -4,7 +4,7 @@ import tools
 
 CARD_ATTRS = ['name', 'artist', 'multiverseid', 'number', 'rarity', 
               'type_oracle', 'rules_printed', 'type_printed', 'rules_oracle',
-              'manacost', 'power', 'toughness', 'flavor_text']
+              'manacost', 'power', 'toughness', 'flavor_text', 'loyalty']
 
 class DataConverter:
     
@@ -21,6 +21,8 @@ class DataConverter:
             return int(value)
         except:
             return tools.null
+
+    do_loyalty = do_number # only for Planeswalkers
 
     def do_power(self, node, value):
         try:
@@ -141,6 +143,22 @@ class MagicCard(object):
     def toughness_varies(self):
         return isinstance(self['toughness'], tools.Abstract)
 
+    @property
+    def cmc(self):
+        cmc = 0
+        for x in self['manacost']:
+            if x in "RUWGBS":
+                cmc += 1
+            elif x in "XYZ":
+                pass # counts as zero
+            elif len(x) == 2 and x[0] == "2" and x[1] in "WURGB":
+                cmc += 2 # {2R} etc counts as 2
+            else:
+                try:
+                    cmc += int(x)
+                except:
+                    pass
+        return cmc
 
 #
 # set color properties dynamically
