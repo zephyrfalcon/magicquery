@@ -65,6 +65,9 @@ def load_addons(sets=[]):
         keywords = addons.load_addons(fn)
         addons.proliferate(cards, keywords) # :-)
 
+def mana_cost_repr(card):
+    return "".join(["{%s}" % x for x in card['manacost']])
+
 class MagicCardDB:
 
     def __init__(self, cards):
@@ -90,7 +93,8 @@ class MagicCardDB:
         temp = "%" + str(max_len) + "d"
         for idx, card in enumerate(self.results):
             print (temp % (idx+1)) + "/" + str(len(self.results)),
-            print "[%s] %s" % (card['set'].shortname, card['name'])
+            print "[%s] %s" % (card['set'].shortname, card['name']),
+            print mana_cost_repr(card)
 
 
 # TODO: expand this so it shows all relevant info for a card
