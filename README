@@ -25,6 +25,8 @@ Quick example queries:
 # find all blue creatures with power > 10
 > blue and power > 10
 
+(but much, MUCH more is possible... see magiccards.py.)
+
 ~
 
 Will write docs and such later. Code is very "dirty" right now, must be
