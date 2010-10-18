@@ -39,6 +39,14 @@ class DataConverter:
             parts.append(n.text)
         return parts
 
+class MagicSet(object):
+
+    @classmethod
+    def from_xml(cls, xml):
+        s = cls()
+        for name in ['name', 'shortname', 'release_date']:
+            setattr(s, name, xml.find(name).text)
+        return s
 
 class MagicCard(object):
 
