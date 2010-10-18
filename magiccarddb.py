@@ -1,6 +1,8 @@
 # magiccarddb.py
 
 import sys
+#
+import tools
 
 class MagicCardDB:
 
@@ -57,8 +59,13 @@ def show_card(card):
     print mana_cost_repr(card)
     print card['type_oracle']
     print card['rules_oracle']
-    if card['power'] is not null:
+    print card['rarity']
+    if card['flavor_text']:
+        print card['flavor_text']
+    if card['power'] is not tools.null:
         print "%s/%s" % (card['power'], card['toughness'])
+    if card['loyalty']:
+        print "Loyalty:", card['loyalty']
 
 def mana_cost_repr(card):
     return "".join(["{%s}" % x for x in card['manacost']])
