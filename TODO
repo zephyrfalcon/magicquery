@@ -8,17 +8,10 @@ GENERAL:
 
     - add a way to set options at the prompt
 
-    - when doing a query, find all matches first (while showing some kind of
-      progress, maybe a dot for each set or something), then display matches,
-      according to settings (e.g. sorted by X, show a number in front, etc).
-      The current setup (show card names as soon as we find a match) works for
-      now, but will be an obstacle later.
-
 CARD METHODS/ATTRIBUTES:
 
-    - name_match() etc, that match against regular expressions
-
     - once we have keyword data: attribute('flying') etc.
+      [in progress]
 
     - some/all of the keywords could be properties, e.g. we could support
       "flying" instead of "has('flying')"
@@ -29,9 +22,7 @@ CARD METHODS/ATTRIBUTES:
       interesting, since I want to be able to say, show all cards that produce
       (at least) G, show all cards that produce colorless mana, etc.
 
-    - converted mana cost (tricky in some places)
-
-    - snow mana
+    - snow mana?
 
     - we should still be able to "pick apart" hybrid mana (e.g. show cards
       that have R/W hybrid mana; this is NOT the same as "has_hybrid_mana and
@@ -57,18 +48,8 @@ OUTPUT:
     - users should be able to specify custom print functions for both output
       on screen, and to file
 
-    - ways to "group" results, like the SQL GROUP BY construct; e.g. group by
-      color, etc. (Maybe only a few values would make sense here; color, set,
-      card type, ...?)
-
 COMMAND LINE:
 
-    - add a way to display all info we have about a certain card, e.g.
-
-      > ?Sliver Queen
-      ...prints all data for this card...
-
-    - 
 
 PROGRAMMABLE:
 
