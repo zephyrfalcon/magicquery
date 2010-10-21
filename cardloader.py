@@ -59,7 +59,7 @@ class CardLoader:
         addondir = os.path.expanduser(self.cfg.get('main', 'addondir'))
         if addondir:
             addon_files = get_files_for_sets(self.sets, addondir, ".txt")
-            for fn in addon_files:
-                keywords = addons.load_addons(fn)
-                addons.proliferate(self.cards, keywords) # :-)
+            kwdicts = [addons.load_addons(fn) for fn in addon_files]
+            kwdict = addons.consolidate_keywords(kwdicts)
+            addons.proliferate(self.cards, kwdict) # :-)
 

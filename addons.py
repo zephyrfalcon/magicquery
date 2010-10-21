@@ -16,6 +16,12 @@ def load_addons(filename):
 
     return cards
 
+def consolidate_keywords(dicts):
+    kw = {}
+    for d in dicts:
+        kw.update(d)
+    return kw
+
 def proliferate(cards, keywords):
     """ Add keywords to card objects. """
     for card in cards:
@@ -26,11 +32,4 @@ def proliferate(cards, keywords):
         except KeyError:
             continue
 
-    '''
-    for cardname, kw in keywords.items():
-        for card in cards:
-            if card['name'].lower() == cardname.lower():
-                card._data['keywords'] = kw
-                #print "Added keywords for:", card['name']
-    '''
 

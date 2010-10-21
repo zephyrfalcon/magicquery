@@ -8,6 +8,9 @@ GENERAL:
 
     - add a way to set options at the prompt
 
+    - right now '?' shows the oracle type/rules; there should also be an easy
+      way to show the originals.
+
 CARD METHODS/ATTRIBUTES:
 
     - once we have keyword data: attribute('flying') etc.
@@ -49,6 +52,12 @@ OUTPUT:
       on screen, and to file
 
 COMMAND LINE:
+
+
+KEYWORDS:
+
+    - keep a list of cards that we already added keywords for. filter out
+      those cards somehow before we apply the keywords of a next set.
 
 
 PROGRAMMABLE:
