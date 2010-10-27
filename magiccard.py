@@ -179,13 +179,15 @@ class MagicCard(object):
     @property
     def cmc(self):
         cmc = 0
-        for x in self['manacost']:
+        for x in self._data['manacost']:
             if x in "RUWGBS":
                 cmc += 1
             elif x in "XYZ":
                 pass # counts as zero
             elif len(x) == 2 and x[0] == "2" and x[1] in "WURGB":
                 cmc += 2 # {2R} etc counts as 2
+            elif len(x) == 2 and x[0] in "WURGB" and x[1] in "WURGB":
+                cmc += 1 # hybrid mana
             else:
                 try:
                     cmc += int(x)
