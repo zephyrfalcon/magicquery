@@ -42,6 +42,9 @@ CARD METHODS/ATTRIBUTES:
       We should have a shortlist of card names that can be "forced" to be a
       certain color, and use them in the color properties.
 
+    - some keywords have TWO arguments, e.g. reinforce (as seen in MOR). we
+      currently have no way to query both arguments.
+
 OUTPUT:
 
     - can be redirected or written directly to file, if desired

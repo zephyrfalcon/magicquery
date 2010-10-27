@@ -101,6 +101,8 @@ class MagicCard(object):
 
     @property
     def colorless(self):
+        if self._data['name'] in force_color['colorless']: 
+            return True
         for x in self._data['manacost']:
             if tools.contains_any(x, "RBWGU"):
                 return False
@@ -192,13 +194,34 @@ class MagicCard(object):
         return cmc
 
 #
+# some cards have a color but no mana cost
+
+force_color = {
+    'B': ['Slaughter Pact',
+          'Living End'],
+    'G': ["Summoner's Pact",
+          "Dryad Arbor",
+          "Hypergenesis"],
+    'R': ['Pact of the Titan',
+          'Crimson Kobolds', 
+          'Crookshank Kobolds', 
+          'Kobolds of Kher Keep'],
+    'U': ['Pact of Negation',
+          'Evermind',
+          'Ancestral Vision'],
+    'W': ['Intervention Pact',
+          'Restore Balance'],
+    'colorless': ["Ghostfire"],
+}
+
+#
 # set color properties dynamically
 
 COLORS = [('red', 'R'), ('white', 'W'), ('blue', 'U'), ('green', 'G'),
           ('black', 'B')]
 def add_color_property(color, symbol):
     def f(self):
-        return self.has_color(symbol)
+        return self.has_color(symbol) or self['name'] in force_color[symbol]
     f.__name__ = color
     setattr(MagicCard, color, property(f))
 for color, symbol in COLORS:
