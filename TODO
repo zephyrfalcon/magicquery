@@ -18,12 +18,15 @@ CARD METHODS/ATTRIBUTES:
 
     - some/all of the keywords could be properties, e.g. we could support
       "flying" instead of "has('flying')"
+      [2010.10.31] Probably not, there are too many of them, and some of them
+      clash with a more useful use of the name (see protection below)
 
     - some keywords have additional info, e.g. we should be able to do
       "protection('white')" etc. (although this clashes with a potential
-      property called 'protection'.) ditto for mana, etc. mana is especially
-      interesting, since I want to be able to say, show all cards that produce
-      (at least) G, show all cards that produce colorless mana, etc.
+      property called 'protection'... but we can use has('protection')
+      instead.) ditto for mana, etc. mana is especially interesting, since I
+      want to be able to say, show all cards that produce (at least) G, show
+      all cards that produce colorless mana, etc.
 
     - snow mana?
 
@@ -34,7 +37,7 @@ CARD METHODS/ATTRIBUTES:
     - in general, we need to be able to select more precisely on mana cost,
       anyway. "card has X in its mana cost", etc.
 
-    - handle X spells
+    - do we need to do anything special for X spells?
 
     - some keywords have TWO arguments, e.g. reinforce (as seen in MOR). we
       currently have no way to query both arguments.
@@ -64,9 +67,14 @@ PROGRAMMABLE:
       to access or manipulate the card database in ways that are difficult or
       impossible using the command line and the query language. let's make
       sure all the relevant code is accessible and obvious to use.
+      (IOW, have a reasonable API)
 
 FARFETCHED:
 
     - add rules and search them
     - add banned/restricted lists and use them as search criteria
+
+DOCUMENTATION:
+
+    - start writing a tutorial and/or manual... with lots of examples...
 
