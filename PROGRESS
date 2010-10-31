@@ -1,0 +1,16 @@
+# Informal progress report. Sort of.
+
+2010-10-31: Added printed_type() and printed_subtype() methods:
+
+$ python magicquery.py LEA LEB 4ED
+975 cards in 3 files, loaded in 0.33s
+> type('interrupt')
+.........
+> printed_type('interrupt')
+.........
+ 1/42 [4ED] Blue Elemental Blast {U}
+ 2/42 [4ED] Chaoslace {R}
+ 3/42 [4ED] Counterspell {U}{U}
+ 4/42 [4ED] Dark Ritual {B}
+ ...etc...
+

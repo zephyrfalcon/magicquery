@@ -36,12 +36,6 @@ CARD METHODS/ATTRIBUTES:
 
     - handle X spells
 
-    - for some card, the color cannot be derived from the mana cost; try e.g.
-      > manacost == [] and not type('land')
-      for examples of such cards. There are more, with cmc == 0.
-      We should have a shortlist of card names that can be "forced" to be a
-      certain color, and use them in the color properties.
-
     - some keywords have TWO arguments, e.g. reinforce (as seen in MOR). we
       currently have no way to query both arguments.
 
@@ -61,6 +55,7 @@ KEYWORDS:
 
     - keep a list of cards that we already added keywords for. filter out
       those cards somehow before we apply the keywords of a next set.
+      [may not apply for some cards, trickier than it seems]
 
 
 PROGRAMMABLE:

@@ -74,6 +74,16 @@ class MagicCard(object):
         self._data['_types'] = before.lower().strip().split()
         self._data['_subtypes'] = after.lower().strip().split()
 
+        # do the same thing for the printed rules/types, so we can find e.g.
+        # interrupts or type 'Falcon'
+        typep = self._data['type_printed']
+        if ' - ' in typep:
+            before, sep, after = typep.partition(" - ")
+        else:
+            before, sep, after = typep.partition("--")
+        self._data['_printed_types'] = before.lower().strip().split()
+        self._data['_printed_subtypes'] = after.lower().strip().split()
+
     def __getitem__(self, name):
         try:
             return self._data[name]
@@ -93,6 +103,12 @@ class MagicCard(object):
 
     def anytype(self, name):
         return self.type(name) or self.subtype(name)
+
+    # we support old-school types as well
+    def printed_type(self, name):
+        return name.lower() in self._data['_printed_types']
+    def printed_subtype(self, name):
+        return name.lower() in self._data['_printed_subtypes']
 
     def has_color(self, color):
         for x in self._data['manacost']:
@@ -121,6 +137,8 @@ class MagicCard(object):
         return s.lower() in self['flavor_text'].lower()
     def text_like(self, s):
         return s.lower() in self['rules_oracle'].lower()
+    def printed_text_like(self, s):
+        return s.lower() in self._data['rules_printed'].lower()
 
     def name_match(self, regex, case_sensitive=1):
         return re.search(regex, self['name'], 0 if case_sensitive else re.I)
@@ -129,6 +147,9 @@ class MagicCard(object):
                0 if case_sensitive else re.I)
     def text_match(self, regex, case_sensitive=1):
         return re.search(regex, self['rules_oracle'], 
+               0 if case_sensitive else re.I)
+    def printed_text_match(self, regex, case_sensitive=1):
+        return re.search(regex, self._data['rules_printed'], 
                0 if case_sensitive else re.I)
 
     def has(self, keyword, arg=None):
