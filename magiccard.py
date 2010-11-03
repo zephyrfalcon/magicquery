@@ -250,3 +250,16 @@ def add_color_property(color, symbol):
 for color, symbol in COLORS:
     add_color_property(color, symbol)
 
+#
+# ditto for selected types
+
+TYPE_PROPERTIES = ["creature", "artifact", "instant", "land", "enchantment",
+                   "planeswalker", "sorcery"]
+def add_type_property(prop):
+    def f(self):
+        return self.type(prop)
+    f.__name__ = prop
+    setattr(MagicCard, prop, property(f))
+for prop in TYPE_PROPERTIES:
+    add_type_property(prop)
+
