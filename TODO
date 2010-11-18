@@ -54,6 +54,17 @@ OUTPUT:
 COMMAND LINE:
 
 
+    - there should be options that can be set from the command line, e.g. set
+      the default output format, only list the same card once in a result set,
+      etc.
+
+    - it should be possible to enter simple "group by" queries from the
+      command line. not sure how yet. :-) I want to be able to group by color,
+      for example, and the program shows how many cards there are of each
+      color. [maybe we should give it a predicate, and a list with values to
+      try. in this case, we would give it has_color, then a list of colors. we
+      could do the same with types, etc.]
+
 KEYWORDS:
 
     - keep a list of cards that we already added keywords for. filter out
