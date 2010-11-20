@@ -46,6 +46,13 @@ class MagicSet(object):
         s = cls()
         for name in ['name', 'shortname', 'release_date']:
             setattr(s, name, xml.find(name).text)
+
+        s.tags = []
+        tag_node = xml.find('tags')
+        if tag_node:
+            for child in tag_node.getchildren():
+                s.tags.append(child.tag)
+
         return s
 
 class MagicCard(object):
