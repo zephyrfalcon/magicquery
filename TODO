@@ -72,6 +72,14 @@ KEYWORDS:
       [may not apply for some cards, trickier than it seems]
 
 
+SETS:
+
+    - I want to be able to say 'set.online' if a set is available in MTGO, and
+      'set.online_only' if it's _ONLY_ in MTGO (like Masters Edition etc).
+      To do the former, we'd need a list of sets that are available in MTGO as
+      well. Or maybe add a tag to magicripper's sets.py that indicates this.
+
+
 PROGRAMMABLE:
 
     - since everything is in Python, programmers could hack up quick scripts
