@@ -55,6 +55,9 @@ class MagicSet(object):
 
         return s
 
+    def has_tag(self, tag):
+        return tag.lower() in self.tags
+
 class MagicCard(object):
 
     def __init__(self):
