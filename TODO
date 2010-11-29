@@ -65,6 +65,16 @@ COMMAND LINE:
       try. in this case, we would give it has_color, then a list of colors. we
       could do the same with types, etc.]
 
+    - add a query as a command line option
+
+    - command line switch to get N random cards? (can be used in combination
+      with queries, so we can get e.g. N random red creatures, etc)
+
+    - in addition to the random stuff, we could do a "booster simulator",
+      which gives you 15 cards (with the correct rarity distributions), like
+      you would get them in a booster pack
+
+
 KEYWORDS:
 
     - keep a list of cards that we already added keywords for. filter out
