@@ -27,3 +27,32 @@ def contains_any(s, substrs):
     for sub in substrs:
         if sub in s: return True
     return False
+
+def unique(lst, key=None, keep=None):
+    """ Take a list and return a new list with duplicate elements removed.
+        Preserves the original order.
+        By default, the value of the items themselves are used to determine
+        duplicates, but a function <key> may be specified to do this instead
+        (for example, lambda c: c['name'] would produce a list unique by card
+        name).
+        In case a duplicate is found, the <keep> function may be used to
+        determine which one is kept; it takes two items and returns a boolean;
+        if true, the first one is kept, otherwise the second.
+    """
+    if key is None: key = lambda x: x
+    if keep is None: keep = lambda a, b: a
+    d = {}
+    for idx, item in enumerate(lst):
+        dkey = key(item)
+        try:
+            existing = d[dkey]
+        except KeyError:
+            d[dkey] = (idx, item)
+        else:
+            if not keep(existing, item):
+                d[dkey] = item
+
+    results = d.values()
+    results.sort()
+    return [x[1] for x in results]
+

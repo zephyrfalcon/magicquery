@@ -4,11 +4,15 @@ import sys
 #
 import tools
 
+class DBOptions:
+    unique = False
+
 class MagicCardDB:
 
-    def __init__(self, cards):
+    def __init__(self, cards, options=None):
         self.cards = cards
         self.results = [] # current result set
+        self.options = options or DBOptions()
 
     def query(self, expr):
         self.results = []
@@ -24,6 +28,11 @@ class MagicCardDB:
             if result:
                 self.results.append(card)
         print
+
+        if self.options.unique:
+            # remove duplicates
+            self.results = tools.unique(self.results, key=lambda c: c['name'])
+            # XXX keep can be determined by options?
 
     def show_results(self):
         max_len = len(str(len(self.results)))
