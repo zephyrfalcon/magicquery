@@ -21,8 +21,9 @@ if __name__ == "__main__":
 
     import sys
     short_sets = sys.argv[1:]
-    import magicquery
-    cards = magicquery.load_cards(short_sets)
+    import cardloader
+    loader = cardloader.CardLoader(short_sets)
+    cards = loader.load_cards()
 
     #
     # example: compute the percentage of artifacts in each set
