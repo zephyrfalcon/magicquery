@@ -26,14 +26,14 @@ def get_files_for_sets(sets, dir, suffix):
 
 class CardLoader:
 
-    def __init__(self, sets=None):
-        self.cfg = self._read_configuration()
+    def __init__(self, sets=None, path="config.txt"):
+        self.cfg = self._read_configuration(path)
         self.sets = sets or []
         self.cards = []
 
-    def _read_configuration(self):
+    def _read_configuration(self, path="config.txt"):
         cp = ConfigParser.ConfigParser()
-        cp.read("config.txt")
+        cp.read(path)
         return cp
 
     def load_cards(self):
