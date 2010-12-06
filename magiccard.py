@@ -149,6 +149,8 @@ class MagicCard(object):
         return s.lower() in self['rules_oracle'].lower()
     def printed_text_like(self, s):
         return s.lower() in self._data['rules_printed'].lower()
+    rules_like = text_like  # alias
+    printed_rules_like = printed_text_like  # alias
 
     def name_match(self, regex, case_sensitive=1):
         return re.search(regex, self['name'], 0 if case_sensitive else re.I)
@@ -161,6 +163,8 @@ class MagicCard(object):
     def printed_text_match(self, regex, case_sensitive=1):
         return re.search(regex, self._data['rules_printed'], 
                0 if case_sensitive else re.I)
+    rules_match = text_match  # alias
+    printed_rules_match = printed_text_match  # alias
 
     def has(self, keyword, arg=None):
         # E.g. has('protection')
