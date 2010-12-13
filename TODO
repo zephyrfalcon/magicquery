@@ -28,8 +28,6 @@ CARD METHODS/ATTRIBUTES:
       want to be able to say, show all cards that produce (at least) G, show
       all cards that produce colorless mana, etc.
 
-    - snow mana?
-
     - we should still be able to "pick apart" hybrid mana (e.g. show cards
       that have R/W hybrid mana; this is NOT the same as "has_hybrid_mana and
       white and red").  Also 2/X hybrids.
@@ -41,6 +39,12 @@ CARD METHODS/ATTRIBUTES:
 
     - some keywords have TWO arguments, e.g. reinforce (as seen in MOR). we
       currently have no way to query both arguments.
+
+    - there should be a way to test if a card _only_ appears in a given set
+      (or maybe a list of sets). (among other things, this is useful for
+      finding cards in decks and special sets and such for which we don't have
+      keywords stored yet, without having to make a separate list of all the
+      cards in that set/deck.)
 
 OUTPUT:
 
