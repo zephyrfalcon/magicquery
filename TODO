@@ -46,6 +46,8 @@ CARD METHODS/ATTRIBUTES:
       keywords stored yet, without having to make a separate list of all the
       cards in that set/deck.)
 
+    - Phyrexian mana counts as a CMC of 1, is this correct? 
+
 OUTPUT:
 
     - can be redirected or written directly to file, if desired

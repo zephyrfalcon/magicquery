@@ -199,7 +199,15 @@ class MagicCard(object):
     @property
     def has_hybrid_mana(self):
         for x in self._data['manacost']:
-            if len(x) == 2 and (x[0] in "WUGBR" or x[1] in "WUGBR"):
+            if len(x) == 2 and (x[0] in "WUGBR" or x[1] in "WUGBR") \
+            and x[0] != "P":
+                return True
+        return False
+
+    @property
+    def has_phyrexian_mana(self):
+        for x in self._data['manacost']:
+            if len(x) == 2 and x[0] == 'P' and x[1] in "WUGBR":
                 return True
         return False
 
@@ -223,6 +231,8 @@ class MagicCard(object):
                 cmc += 2 # {2R} etc counts as 2
             elif len(x) == 2 and x[0] in "WURGB" and x[1] in "WURGB":
                 cmc += 1 # hybrid mana
+            elif len(x) == 2 and x[0] == "P" and x[1] in "WURGB":
+                cmc += 1 # phyrexian mana
             else:
                 try:
                     cmc += int(x)
